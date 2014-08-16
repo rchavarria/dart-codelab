@@ -16,7 +16,7 @@ void main() {
 
 void updateBadge(Event e) {
   String newName = (e.target as InputElement).value;
-  setBadgeName(newName);
+  setBadgeName(new PirateName(firstName: newName));
   
   if(newName.trim().isEmpty) {
     btnGenerateName..disabled = false
@@ -28,11 +28,11 @@ void updateBadge(Event e) {
 }
 
 void generateBadge(MouseEvent event) {
-  setBadgeName('Anne Bonney');
+  setBadgeName(new PirateName());
 }
 
-void setBadgeName(String newName) {
-  querySelector('#badgeName').text = newName;
+void setBadgeName(PirateName newName) {
+  querySelector('#badgeName').text = newName.pirateName;
 }
 
 class PirateName {
