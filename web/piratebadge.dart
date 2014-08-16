@@ -16,6 +16,14 @@ void main() {
 void updateBadge(Event e) {
   String newName = (e.target as InputElement).value;
   setBadgeName(newName);
+  
+  if(newName.trim().isEmpty) {
+    btnGenerateName..disabled = false
+                   ..text = 'Aye! Gimme a name!';
+  } else {
+    btnGenerateName..disabled = true
+                   ..text = 'Write yer name';
+  }
 }
 
 void generateBadge(MouseEvent event) {
