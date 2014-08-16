@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import "dart:html";
+import "dart:math" show Random;
 
 ButtonElement btnGenerateName;
 
@@ -32,4 +33,36 @@ void generateBadge(MouseEvent event) {
 
 void setBadgeName(String newName) {
   querySelector('#badgeName').text = newName;
+}
+
+class PirateName {
+  static final Random generator = new Random();
+  
+  static final List NAMES = [
+    'Anne', 'Mary', 'Jack', 'Morgan', 'Roger',
+    'Bill', 'Ragnar', 'Ed', 'John', 'Jane' ];
+  static final List APPELLATIONS = [
+    'Jackal', 'King', 'Red', 'Stalwart', 'Axe',
+    'Young', 'Brave', 'Eager', 'Wily', 'Zesty'];
+  
+  String _name;
+  String _appellation;
+
+  PirateName({String firstName, String appellation}) {
+    if (firstName == null) {
+      _name = NAMES[generator.nextInt(NAMES.length)];
+    } else {
+      _name = firstName;
+    }
+
+    if (appellation == null) {
+      _appellation = APPELLATIONS[generator.nextInt(APPELLATIONS.length)];
+    } else {
+      _appellation = appellation;
+    }
+  }
+  
+  String get pirateName =>
+      _name.isEmpty ? '' : '$_name the $_appellation';
+  
 }
