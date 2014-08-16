@@ -9,5 +9,5 @@ void main() {
 }
 
 void updateBadge(Event e) {
-  querySelector('#badgeName').text = e.target.value;
+  querySelector('#badgeName').text = (e.target as InputElement).value;
 }
