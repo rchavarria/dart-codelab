@@ -14,7 +14,8 @@ void main() {
 }
 
 void updateBadge(Event e) {
-  querySelector('#badgeName').text = (e.target as InputElement).value;
+  String newName = (e.target as InputElement).value;
+  setBadgeName(newName);
 }
 
 void generateBadge(MouseEvent event) {
