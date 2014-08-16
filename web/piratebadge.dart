@@ -4,10 +4,23 @@
 
 import "dart:html";
 
+ButtonElement btnGenerateName;
+
 void main() {
   querySelector('#inputName').onInput.listen(updateBadge);
+  
+  btnGenerateName = querySelector('#generateName');
+  btnGenerateName.onClick.listen(generateBadge);
 }
 
 void updateBadge(Event e) {
   querySelector('#badgeName').text = (e.target as InputElement).value;
+}
+
+void generateBadge(MouseEvent event) {
+  setBadgeName('Anne Bonney');
+}
+
+void setBadgeName(String newName) {
+  querySelector('#badgeName').text = newName;
 }
