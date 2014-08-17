@@ -6,6 +6,7 @@ import "dart:html";
 import "dart:math" show Random;
 import "dart:convert" show JSON;
 
+final String TREASURE_KEY = 'pirateName';
 ButtonElement btnGenerateName;
 
 void main() {
@@ -13,6 +14,8 @@ void main() {
   
   btnGenerateName = querySelector('#generateName');
   btnGenerateName.onClick.listen(generateBadge);
+  
+  setBadgeName(getBadgeNameFromStorage());
 }
 
 void updateBadge(Event e) {
@@ -33,7 +36,21 @@ void generateBadge(MouseEvent event) {
 }
 
 void setBadgeName(PirateName newName) {
+  if (newName == null) {
+    return;
+  }
+  
   querySelector('#badgeName').text = newName.pirateName;
+  window.localStorage[TREASURE_KEY] = newName.jsonString;
+}
+
+PirateName getBadgeNameFromStorage() {
+  String storedName = window.localStorage[TREASURE_KEY];
+  if (storedName != null) {
+    return new PirateName.fromJSON(storedName);
+  } else {
+    return null;
+  }
 }
 
 class PirateName {
@@ -46,7 +63,6 @@ class PirateName {
     'Jackal', 'King', 'Red', 'Stalwart', 'Axe',
     'Young', 'Brave', 'Eager', 'Wily', 'Zesty'];
   
-  final String TREASURE_KEY = 'pirateName';
   String _name;
   String _appellation;
 
