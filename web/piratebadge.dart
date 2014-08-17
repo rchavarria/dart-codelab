@@ -4,6 +4,7 @@
 
 import "dart:html";
 import "dart:math" show Random;
+import "dart:convert" show JSON;
 
 ButtonElement btnGenerateName;
 
@@ -45,6 +46,7 @@ class PirateName {
     'Jackal', 'King', 'Red', 'Stalwart', 'Axe',
     'Young', 'Brave', 'Eager', 'Wily', 'Zesty'];
   
+  final String TREASURE_KEY = 'pirateName';
   String _name;
   String _appellation;
 
@@ -61,8 +63,16 @@ class PirateName {
       _appellation = appellation;
     }
   }
+
+  PirateName.fromJSON(String jsonString) {
+    Map storedName = JSON.decode(jsonString);
+    _name = storedName['f'];
+    _appellation = storedName['a'];
+  }
   
   String get pirateName =>
       _name.isEmpty ? '' : '$_name the $_appellation';
   
+  String get jsonString => 
+      JSON.encode( {"f": _name, "a": _appellation} );
 }
